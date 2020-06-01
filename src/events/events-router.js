@@ -50,7 +50,7 @@ eventsRouter
 eventsRouter
   .route('/:event_id')
   .all((req, res, next) => {
-    EventsService.getById(req.app.get('db'), req.params.user_id)
+    EventsService.getById(req.app.get('db'), req.params.event_id)
       .then((event) => {
         if (!folder) {
           return res.status(404).json({
@@ -75,12 +75,9 @@ eventsRouter
       .catch(next);
   })
   .patch(jsonParser, (req, res, next) => {
-    const { title, content, date_added, user_id } = req.body;
+    const { content } = req.body;
     const eventToUpdate = {
-      title,
       content,
-      date_added,
-      user_id,
     };
 
     const numberOfValues = Object.values(eventToUpdate).filter(
@@ -89,7 +86,7 @@ eventsRouter
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
-          message: `Request body must contain 'title', 'content', 'date_added', and 'user_id'`,
+          message: `Request body must contain 'content'.`,
         },
       });
 
