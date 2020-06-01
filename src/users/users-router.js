@@ -51,7 +51,7 @@ usersRouter
   .all((req, res, next) => {
     UsersService.getById(req.app.get('db'), req.params.user_id)
       .then((user) => {
-        if (!folder) {
+        if (!user) {
           return res.status(404).json({
             error: {
               message: 'User does not exist',
