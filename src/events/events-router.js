@@ -52,7 +52,7 @@ eventsRouter
   .all((req, res, next) => {
     EventsService.getById(req.app.get('db'), req.params.event_id)
       .then((event) => {
-        if (!folder) {
+        if (!event) {
           return res.status(404).json({
             error: {
               message: 'Event does not exist',
