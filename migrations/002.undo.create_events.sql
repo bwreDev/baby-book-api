@@ -1,1 +1,2 @@
+DROP TYPE IF EXISTS event_type;
 DROP TABLE IF EXISTS events;

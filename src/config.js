@@ -7,4 +7,6 @@ module.exports = {
   TEST_DATABASE_URL:
     process.env.TEST_DATABASE_URL ||
     'postgresql://admin:admin1234@localhost/baby_book_test',
+  JWT_SECRET: process.env.JWT_SECRET || 'change-this-secret',
+  JWT_EXPIRY: process.env.JWT_EXPIRY || '3h',
 };

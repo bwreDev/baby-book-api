@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const xss = require('xss');
 const EventsService = require('./events-service');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const eventsRouter = express.Router();
 const jsonParser = express.json();
@@ -16,17 +17,18 @@ const serializeEvent = (event) => ({
 
 eventsRouter
   .route('/')
+  .all(requireAuth)
   .get((req, res, next) => {
     const knexInstance = req.app.get('db');
-    EventsService.getAllEvents(knexInstance)
+    EventsService.getAllEvents(knexInstance, req.user.id)
       .then((events) => {
         res.json(events.map(serializeEvent));
       })
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { title, content, date_added, user_id } = req.body;
-    const newEvent = { title, content, user_id };
+    const { title, content, date_added } = req.body;
+    const newEvent = { title, content };
 
     for (const [key, value] of Object.entries(newEvent))
       if (value == null)
@@ -35,6 +37,7 @@ eventsRouter
             message: `Missing '${key}' in request body`,
           },
         });
+    newEvent.user_id = req.user.id;
     newEvent.date_added = date_added;
 
     EventsService.insertEvent(req.app.get('db'), newEvent)
@@ -49,6 +52,7 @@ eventsRouter
 
 eventsRouter
   .route('/:event_id')
+  .all(requireAuth)
   .all((req, res, next) => {
     EventsService.getById(req.app.get('db'), req.params.event_id)
       .then((event) => {
