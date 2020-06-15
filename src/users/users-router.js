@@ -29,7 +29,7 @@ usersRouter.post('/', jsonParser, (req, res, next) => {
       if (hasUserWithusername)
         return res
           .status(400)
-          .json({ error: `username already taken` });
+          .json({ error: `Username already taken` });
 
       return UsersService.hashPassword(password).then(
         (hashedPassword) => {
