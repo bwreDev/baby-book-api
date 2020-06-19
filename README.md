@@ -6,6 +6,7 @@ It is utilized by my React client at [baby-book-app](https://github.com/cbonner2
 
 Live production of the app can be found at [https://baby-book-app.now.sh/](https://baby-book-app.now.sh/).
 ![splash-page](SplashPage.PNG)
+![profile-page](ProfilePage.PNG)
 
 ## Tech
 
