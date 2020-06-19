@@ -2,9 +2,14 @@
 
 This is the Express server API for my full stack capstone project.
 
-It is utilized by the React client at [baby-book-app](https://github.com/cbonner26118/baby-book-app).
+It is utilized by my React client at [baby-book-app](https://github.com/cbonner26118/baby-book-app).
 
 Live production of the app can be found at [https://baby-book-app.now.sh/](https://baby-book-app.now.sh/).
+![splash-page](SplashPage.PNG)
+
+## Tech
+
+This back end is built using Node.js, Express, and PostgreSQL
 
 # Built using my Express Boilerplate!
 
